@@ -54,7 +54,7 @@ $books_size = sizeof($books);
     <header>
         <div class="container">
             <div class="row">
-                <a href="<?php echo $BASE_URL ?>" class="btn btn-lg btn-secondary">Home</a>
+                <a href="https://book-list-php.herokuapp.com/" class="btn btn-lg btn-secondary">Home</a>
             </div>
         </div>
     </header>

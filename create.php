@@ -1,6 +1,5 @@
 <?php
 
-include_once('config.php');
 
 if (file_exists('books.json')) {
     $json = file_get_contents('books.json');

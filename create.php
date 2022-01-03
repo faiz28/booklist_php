@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <div class="container">
             <div class="row">
-                <a href="<?php echo $BASE_URL ?>" class="btn btn-lg btn-secondary">Home</a>
+                <a href="<?php echo 'index.php' ?>" class="btn btn-lg btn-secondary">Home</a>
             </div>
         </div>
     </header>

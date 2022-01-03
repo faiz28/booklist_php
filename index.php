@@ -115,7 +115,7 @@ $books_size = sizeof($books);
                             alert("Delete one item!");
                         }
                         </script>
-                        <a href="<?php echo $BASE_URL . '/' . 'delete.php?id=' . $key  ?>">
+                        <a href="<?php echo 'delete.php?id=' . $key  ?>">
                             <button class="btn btn-lg btn-danger" onclick="myFunction()">Delete</button>
                         </a>
                     </td>
@@ -127,7 +127,7 @@ $books_size = sizeof($books);
     <br>
     <div class="container">
         <div class="row">
-            <a href="<?php echo $BASE_URL . '/' . 'create.php' ?>">
+            <a href="<?php echo'create.php' ?>">
                 <button class="btn btn-lg btn-primary">Create</button>
             </a>
         </div>

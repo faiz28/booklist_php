@@ -11,8 +11,8 @@ $is_added = 0;
 $pos = -1;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_add = array(
-        "title" =>  $_POST['title'],
-        "author" => $_POST['author'],
+        "title" =>  htmlspecialchars($_POST['title']),
+        "author" => htmlspecialchars($_POST['author']),
         "avilable" => $_POST['avilable'],
         "pages" => $_POST['pages'],
         "isbn" => $_POST['isbn'],

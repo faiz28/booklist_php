@@ -86,7 +86,7 @@ $books_size = sizeof($books);
                     <th>Title</th>
                     <th>Author</th>
                     <th>Availablity</th>
-                    <th>ISBN</th>
+                    <th>Pages</th>
                     <th>ISBN</th>
                     <th>Option</th>
 

@@ -109,13 +109,9 @@ $books_size = sizeof($books);
                     <td><?php echo $book['available'] ? 'True' : 'False'; ?></td>
                     <td><?php echo $book['isbn']; ?></td>
                     <td>
-                        <script>
-                        function myFunction() {
-                            alert("Delete one item!");
-                        }
-                        </script>
+                        
                         <a href="<?php echo 'delete.php?id=' . $key  ?>">
-                            <button class="btn btn-lg btn-danger" onclick="myFunction()">Delete</button>
+                            <button class="btn btn-lg btn-danger" onclick="return confirm('Are you want to delete item?')">Delete</button>
                         </a>
                     </td>
                 </tr>

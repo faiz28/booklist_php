@@ -87,6 +87,7 @@ $books_size = sizeof($books);
                     <th>Author</th>
                     <th>Availablity</th>
                     <th>ISBN</th>
+                    <th>ISBN</th>
                     <th>Option</th>
 
                 </tr>
@@ -107,6 +108,7 @@ $books_size = sizeof($books);
                     </td>
                     <td><?php echo $book['author']; ?></td>
                     <td><?php echo $book['available'] ? 'True' : 'False'; ?></td>
+                    <td><?php echo $book['pages']; ?></td>
                     <td><?php echo $book['isbn']; ?></td>
                     <td>
                         

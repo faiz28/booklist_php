@@ -109,11 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Pages</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="Pages" name="pages" required>
+                    <input type="number" class="form-control" id="inputEmail4" placeholder="Pages" name="pages" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">ISBN</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="ISBN" name="isbn" required>
+                    <input type="number" class="form-control" id="inputEmail4" placeholder="ISBN" name="isbn" required>
                 </div>
             </div>
 

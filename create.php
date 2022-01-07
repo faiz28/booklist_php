@@ -12,7 +12,7 @@ $pos = -1;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_add = array(
         "title" =>  preg_replace( "<", "", $_POST['title']),
-        "author" => preg_replace( "#[^\w]#", "",$_POST['author']),
+        "author" => preg_replace( "<", "",$_POST['author']),
         "avilable" => $_POST['avilable'],
         "pages" => $_POST['pages'],
         "isbn" => $_POST['isbn'],

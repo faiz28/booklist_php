@@ -11,8 +11,8 @@ $is_added = 0;
 $pos = -1;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_add = array(
-        "title" =>  str_replace("</","",  $_POST['title']),
-        "author" => str_replace("</","",  $_POST['author']),
+        "title" =>  str_replace("</", "",  $_POST['title']),
+        "author" => str_replace("</", "",  $_POST['author']),
         "avilable" => $_POST['avilable'],
         "pages" => $_POST['pages'],
         "isbn" => $_POST['isbn'],
@@ -26,14 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $is_added = 1;
     $pos = sizeof($books);
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
-
-
 <html lang="en">
 
 <head>
@@ -41,18 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css" type="text/css">
-    <title>Book list database</title>
+    <title>Create </title>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <div class="row">
-                <a href="<?php echo 'index.php' ?>" class="btn btn-lg btn-secondary">Home</a>
+    <div class="container">
+        <div class="row navbar">
+            <div class="logo">
+                <a href="<?php echo 'index.php' ?>" class="btn btn-lg btn-primary">Home</a>
             </div>
         </div>
-    </header>
-    <br>
+    </div>
 
     <!-- show new item -->
     <div class="container">
@@ -61,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-12">
                 <h3 class="btn btn-success">New item added:</h3>
             </div>
+            <!-- show the added item -->
             <div class="col-md-12">
                 <?php foreach ($books as $key => $book) : ?>
                 <?php if ($pos - 1 == $key) : ?>
@@ -70,13 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif;  ?>
                 <?php endforeach;  ?>
             </div>
-
-
             <hr>
             <?php endif;  ?>
-
-
-
         </div>
 
         <!-- create new item -->
@@ -109,7 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Pages</label>
-                    <input type="number" class="form-control" id="inputEmail4" placeholder="Pages" name="pages" required>
+                    <input type="number" class="form-control" id="inputEmail4" placeholder="Pages" name="pages"
+                        required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">ISBN</label>

@@ -1,128 +1,113 @@
 <?php
 
-
+// check the json file is exists or not
 if (file_exists('books.json')) {
     $json = file_get_contents('books.json');
     $books = json_decode($json, true);
 } else {
     $books = array();
 }
-$is_added = 0;
-$pos = -1;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $new_add = array(
-        "title" =>  str_replace("</", "",  $_POST['title']),
-        "author" => str_replace("</", "",  $_POST['author']),
-        "avilable" => $_POST['avilable'],
-        "pages" => $_POST['pages'],
-        "isbn" => $_POST['isbn'],
-    );
-    array_push($books, $new_add);
-    $book_str = json_encode($books);
-    file_put_contents('books.json', $book_str);
-    // foreach ($books as $key => $book) {
-    //     echo "$book[title]  <br>";
-    // }
-    $is_added = 1;
-    $pos = sizeof($books);
+
+
+// search item
+$query = $_GET['query'];
+$size_search = strlen($query);
+$query = strtolower($query);
+$query = explode(" ", $query);
+
+$search_item = array();
+foreach ($books as $key => $book) {
+    $title = strtolower($book['title']);
+
+    for ($i = 0; $i < sizeof($query); $i += 1) {
+        if ($query[$i] == "" || $query[$i] == " ") continue;
+        if (strpos((string)$title, (string)($query[$i])) !== false) {
+            array_push($search_item, $books[$key]);
+        }
+    }
 }
+
+if ($size_search != 0) {
+    $books = $search_item;
+}
+$books_size = sizeof($books);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/style.css" type="text/css">
-    <title>Book list database</title>
+
+    <title> Book store</title>
 </head>
 
 <body>
+
     <div class="container">
         <div class="row navbar">
             <div class="logo">
                 <a href="<?php echo 'index.php' ?>" class="btn btn-lg btn-primary">Home</a>
             </div>
+            <div class="search-container">
+                <form class="example">
+                    <div>
+                        <input type="text" placeholder="Search.." name="query">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- show new item -->
+
     <div class="container">
         <div class="row">
-            <?php if ($is_added == 1) : ?>
-            <div class="col-md-12">
-                <h3 class="btn btn-success">New item added:</h3>
-            </div>
-            <!-- show the added item -->
-            <div class="col-md-12">
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Availablity</th>
+                    <th>Pages</th>
+                    <th>ISBN</th>
+                    <th>Option</th>
+
+                </tr>
+                <?php if ($books_size == 0) : ?>
+
+                <h4>Sorry, No item found;</h4>
+
+                <?php endif; ?>
                 <?php foreach ($books as $key => $book) : ?>
-                <?php if ($pos - 1 == $key) : ?>
-                <h3> <?php echo (" title : " . $book['title'] . ", Author : " . $book['author'] . ", Avilable : " . $book['avilable'] . ", Pages : " . $book['pages'] . ", ISBN : " . $book['isbn']); ?>
-                </h3>
-                <?php echo "<hr>"; ?>
-                <?php endif;  ?>
-                <?php endforeach;  ?>
+                <tr>
+                    <td><?php echo $key + 1; ?></td>
+                    <td><a href="#"><?php echo $book['title']; ?></a></td>
+                    <td><?php echo $book['author']; ?></td>
+                    <td><?php echo $book['available'] ? 'True' : 'False'; ?></td>
+                    <td><?php echo $book['pages']; ?></td>
+                    <td><?php echo $book['isbn']; ?></td>
+                    <td><a href="<?php echo 'delete.php?id=' . $key  ?>"><button class="btn btn-lg btn-danger"
+                                onclick="return confirm('Are you want to delete item?')">Delete</button></a></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+
+            <div class="create">
+                <a href="<?php echo 'create.php' ?>">
+                    <button class="btn btn-lg btn-primary">Create</button>
+                </a>
             </div>
-            <hr>
-            <?php endif;  ?>
         </div>
-
-        <!-- create new item -->
-        <div class="row">
-            <h2>Create Item:</h2>
-        </div>
-
-
-        <form action="./create.php" method="POST">
-
-
-            <div class="form-group">
-                <label for="inputAddress2" required>Title</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Title" name="title" required>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Author</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="Author" name="author"
-                        required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputState">Avilable State</label>
-                    <select id="inputState" class="form-control" name="avilable" required>
-                        <option value="true" Selected>True</option>
-                        <option value="false">False</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Pages</label>
-                    <input type="number" class="form-control" id="inputEmail4" placeholder="Pages" name="pages"
-                        required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">ISBN</label>
-                    <input type="number" class="form-control" id="inputEmail4" placeholder="ISBN" name="isbn" required>
-                </div>
-            </div>
-
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
     </div>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
 </body>
+
+</html>

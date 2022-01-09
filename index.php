@@ -59,7 +59,7 @@ $books_size = sizeof($books);
             <div class="search-container">
                 <form class="example">
                     <div>
-                        <input type="text" placeholder="Search.." name="query">
+                        <input type="text" placeholder="Search by title" name="query">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </form>

@@ -81,11 +81,7 @@ $books_size = sizeof($books);
                     <th>Option</th>
 
                 </tr>
-                <?php if ($books_size == 0) : ?>
-
-                <h4>Sorry, No item found;</h4>
-
-                <?php endif; ?>
+                
                 <?php foreach ($books as $key => $book) : ?>
                 <tr>
                     <td><?php echo $key + 1; ?></td>
@@ -99,6 +95,11 @@ $books_size = sizeof($books);
                 </tr>
                 <?php endforeach; ?>
             </table>
+            <?php if ($books_size == 0) : ?>
+
+                <h4>Sorry, No item found;</h4>
+
+                <?php endif; ?>
 
             <div class="create">
                 <a href="<?php echo 'create.php' ?>">

@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_add = array(
         "title" =>  str_replace("</", "",  $_POST['title']),
         "author" => str_replace("</", "",  $_POST['author']),
-        "avilable" => $_POST['avilable'],
+        "available" => $_POST['available'],
         "pages" => $_POST['pages'],
         "isbn" => $_POST['isbn'],
     );
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-12">
                 <?php foreach ($books as $key => $book) : ?>
                 <?php if ($pos - 1 == $key) : ?>
-                <h3> <?php echo (" title : " . $book['title'] . ", Author : " . $book['author'] . ", Avilable : " . $book['avilable'] . ", Pages : " . $book['pages'] . ", ISBN : " . $book['isbn']); ?>
+                <h3> <?php echo (" title : " . $book['title'] . ", Author : " . $book['author'] . ", Available : " . $book['available'] . ", Pages : " . $book['pages'] . ", ISBN : " . $book['isbn']); ?>
                 </h3>
                 <?php echo "<hr>"; ?>
                 <?php endif;  ?>
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Avilable State</label>
-                    <select id="inputState" class="form-control" name="avilable" required>
+                    <select id="inputState" class="form-control" name="available" required>
                         <option value="true" Selected>True</option>
                         <option value="false">False</option>
                     </select>

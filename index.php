@@ -10,7 +10,14 @@ if (file_exists('books.json')) {
 
 
 // search item
-$query = $_GET['query'];
+if(isset($_GET['query']))
+{
+    
+    $query = $_GET['query'];
+}
+else{
+       $query = "";
+}
 $size_search = strlen($query);
 $query = strtolower($query);
 $query = explode(" ", $query);
